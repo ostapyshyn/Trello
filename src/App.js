@@ -1,10 +1,12 @@
 import './App.css';
 import ListOfTasks from './components/ListOfTasks';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const { amount } = useSelector((store) => store.tasks);
   return (
     <div className="App">
-      <ListOfTasks  />
+      <ListOfTasks amount={amount} />
     </div>
   );
 }

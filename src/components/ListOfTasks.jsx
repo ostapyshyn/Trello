@@ -2,7 +2,7 @@ import { getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { tasksCollectionRef } from '../lib/firestore.collections';
 
-export default function ListOfTasks() {
+export default function ListOfTasks(props) {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,8 @@ export default function ListOfTasks() {
   }
   return (
     <div>
-      <h3>List of tasks</h3>
+      <h3>List of tasks {props.amount}</h3>
+
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>{task.title}</li>
