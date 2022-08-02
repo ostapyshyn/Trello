@@ -7,7 +7,7 @@ export default function ListOfTasks() {
 
   useEffect(() => {
     getTasks();
-  });
+  }, []);
 
   function getTasks() {
     getDocs(tasksCollectionRef).then((data) => {
