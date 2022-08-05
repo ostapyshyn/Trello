@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { MoreVert } from '@material-ui/icons';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ClickOutHandler from 'react-onclickout';
 
 import storeApi from '../../utils/storeApi';
@@ -44,7 +44,7 @@ export default function Title({ title, listId }) {
             {title}
           </h2>
           <button className="list-button" onClick={() => setOpenOptions(!openOptions)}>
-            <MoreVert />
+            <MoreVertIcon />
           </button>
           {openOptions && (
             <ClickOutHandler

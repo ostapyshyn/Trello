@@ -4,17 +4,17 @@ import TextareaAutosize from 'react-textarea-autosize';
 import DeleteOutline from '@mui/icons-material/DeleteOutline';
 import { Draggable } from 'react-beautiful-dnd';
 
-// import storeApi from '../../utils/storeApi';
+import storeApi from '../../utils/storeApi';
 
 import './styles.scss';
 
 export default function Card({ card, index, listId }) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState(card.title);
-  // const { removeCard, updateCardTitle } = useContext(storeApi);
+  const { removeCard, updateCardTitle } = useContext(storeApi);
 
   const handleOnBlur = (cardId) => {
-    // updateCardTitle(newTitle, index, listId);
+    updateCardTitle(newTitle, index, listId);
     setOpen(!open);
   };
 
@@ -43,7 +43,7 @@ export default function Card({ card, index, listId }) {
                 <p>{card.title}</p>
                 <button
                   onClick={() => {
-                    // removeCard(index, listId, card.id);
+                    removeCard(index, listId, card.id);
                   }}
                 >
                   <DeleteOutline />

@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 
-// import storeApi from '../../utils/storeApi';
+import storeApi from '../../utils/storeApi';
 
 import './styles.scss';
 
 export default function InputCard({ setOpen, listId, type }) {
-  // const { addMoreCard, addMoreList } = useContext(storeApi);
+  const { addMoreCard, addMoreList } = useContext(storeApi);
   const [title, setTitle] = useState('');
 
   const handleOnChange = (e) => {
@@ -14,11 +14,11 @@ export default function InputCard({ setOpen, listId, type }) {
   };
 
   const handleBtnConfirm = () => {
-    // if (type === 'card') {
-    //   addMoreCard(title, listId);
-    // } else {
-    //   addMoreList(title);
-    // }
+    if (type === 'card') {
+      addMoreCard(title, listId);
+    } else {
+      addMoreList(title);
+    }
     setOpen(false);
     setTitle('');
   };
