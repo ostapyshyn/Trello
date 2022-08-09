@@ -33,10 +33,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
       </Routes>
-
-      <Navbar />
-      <Home />
-      <ListOfTasks amount={amount} />
+      {/* <Home />
+      <ListOfTasks amount={amount} /> */}
     </div>
   );
 }
