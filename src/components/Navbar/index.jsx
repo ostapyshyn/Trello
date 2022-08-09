@@ -4,7 +4,7 @@ import { Bookmark } from '@mui/icons-material';
 
 const Navbar = () => {
   return (
-    <nav>
+    <nav className='topnav'>
       <div className="container">
         <div>
           <Bookmark />

@@ -21,7 +21,7 @@ function Footer() {
         <ul className="navbarListItems">
           <li className="navbarListItem" onClick={() => navigate('/')}>
             <HomeIcon
-              fill={pathMatchRoute('/') ? '#2c2c2c' : '#8f8f8f'}
+              fill={pathMatchRoute('/') ? '#DC143C' : '#2c2c2c'}
               width="36px"
               height="36px"
             />
@@ -31,13 +31,13 @@ function Footer() {
           </li>
           <li className="navbarListItem" onClick={() => navigate('/about')}>
             <AboutIcon
-              fill={pathMatchRoute('/offers') ? '#2c2c2c' : '#8f8f8f'}
+              fill={pathMatchRoute('/about') ? '#DC143C' : '#2c2c2c'}
               width="36px"
               height="36px"
             />
             <p
               className={
-                pathMatchRoute('/offer') ? 'navbarListItemNameActive' : 'navbarListItemName'
+                pathMatchRoute('/about') ? 'navbarListItemNameActive' : 'navbarListItemName'
               }
             >
               About
@@ -45,7 +45,7 @@ function Footer() {
           </li>
           <li className="navbarListItem" onClick={() => navigate('/profile')}>
             <PersonOutlineIcon
-              fill={pathMatchRoute('/profile') ? '#2c2c2c' : '#8f8f8f'}
+              fill={pathMatchRoute('/profile') ? '#DC143C' : '#2c2c2c'}
               width="36px"
               height="36px"
             />
