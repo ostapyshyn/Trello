@@ -11,6 +11,11 @@ import NotFoundPage from './pages/NotFoundPage';
 import Layout from './components/Layout';
 import Board from './pages/Board';
 
+import Profile from './pages/Profile';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import ForgotPassword from './pages/ForgotPassword';
+
 function App() {
   const { amount } = useSelector((store) => store.tasks);
   return (
@@ -21,6 +26,11 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/board" element={<Board />} />
           <Route path="*" element={<NotFoundPage />} />
+
+          <Route path="/profile" element={<SignIn />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
       </Routes>
 
