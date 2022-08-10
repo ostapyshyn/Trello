@@ -35,6 +35,7 @@ function SignIn() {
         navigate('/');
       }
     } catch (error) {
+      console.log(error);
       // toast.error('Bad User Credentials');
     }
   };
@@ -48,6 +49,7 @@ function SignIn() {
 
         <form onSubmit={onSubmit}>
           <input
+            autocomplete="off"
             type="email"
             className="emailInput"
             placeholder="Email"
