@@ -49,7 +49,7 @@ function SignIn() {
 
         <form onSubmit={onSubmit}>
           <input
-            autocomplete="off"
+            autoComplete="off"
             type="email"
             className="emailInput"
             placeholder="Email"
