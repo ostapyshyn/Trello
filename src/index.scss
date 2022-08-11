@@ -179,13 +179,27 @@ button {
   font-weight: 800;
 }
 
-.logOut {
-  cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
+.profileName,
+.profileEmail,
+.profileAddress,
+.profileAddressActive,
+.profileEmailActive,
+.profileNameActive {
+  all: unset;
+  margin: 0.3rem 0;
   font-weight: 600;
-  color: #ffffff;
-  background-color: #00cc66;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
+  width: 100%;
+}
+.profileNameActive {
+  background-color: rgba(44, 44, 44, 0.1);
+}
+
+.profileEmail,
+.profileAddress,
+.profileAddressActive,
+.profileEmailActive {
+  font-weight: 500;
+}
+.profileEmailActive {
+  background-color: rgba(44, 44, 44, 0.1);
 }
