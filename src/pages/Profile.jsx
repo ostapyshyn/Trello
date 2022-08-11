@@ -21,7 +21,7 @@ const Profile = () => {
   return (
     <div className="profile">
       <header className="profileHeader">
-        <p className="pageHeader">My profile</p>
+        <PageHeaderParagraph>My profile</PageHeaderParagraph>
         <button type="button" className="logOut" onClick={onLogout}>
           Logout
         </button>
@@ -29,5 +29,10 @@ const Profile = () => {
     </div>
   );
 };
+
+const PageHeaderParagraph = styled.p`
+  font-size: 2rem;
+  font-weight: 800;
+`;
 
 export default Profile;
