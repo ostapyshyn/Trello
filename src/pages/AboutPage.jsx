@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const AboutPage = () => {
   return (
     <ProfileCard>
-      <h1>About us.</h1>
+      <h1>About us</h1>
       <h2>Hello There!</h2>
       <p>This is a demo Trello project!</p>
     </ProfileCard>
