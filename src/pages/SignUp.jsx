@@ -61,7 +61,7 @@ function SignUp() {
 
         <form onSubmit={onSubmit}>
           <input
-            autocomplete="off"
+            autoComplete="off"
             type="text"
             className="nameInput"
             placeholder="Name"
@@ -70,7 +70,7 @@ function SignUp() {
             onChange={onChange}
           />
           <input
-            autocomplete="off"
+            autoComplete="off"
             type="email"
             className="emailInput"
             placeholder="Email"
