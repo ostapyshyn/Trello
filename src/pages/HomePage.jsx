@@ -7,6 +7,7 @@ import { db } from '../lib/init-firebase';
 import { toast } from 'react-toastify';
 import Spinner from '../components/Spinner';
 import { collection, getDocs, query, where, orderBy, limit, startAfter } from 'firebase/firestore';
+import BoardItem from '../components/BoardItem';
 
 const HomePage = () => {
   const [boards, setBoards] = useState(null);
@@ -55,15 +56,17 @@ const HomePage = () => {
       ) : boards && boards.length > 0 ? (
         <>
           <main>
-            <ul className="categoryListings">
+            <ListofBoards>
               {boards.map((board) => (
-                <h3>{board.data.name}</h3>
+                <BoardItem boardData={board.data} id={board.id} key={board.id} />
               ))}
-            </ul>
+            </ListofBoards>
           </main>
         </>
       ) : (
-        <p>There are no boards yet!</p>
+        <ProfileCard>
+          <p>There are no boards yet!</p>
+        </ProfileCard>
       )}
     </Wrapper>
   );
@@ -71,6 +74,11 @@ const HomePage = () => {
 
 const Wrapper = styled.div`
   padding: 1rem;
+`;
+
+const ListofBoards = styled.ul`
+  display: flex;
+  padding: 0;
 `;
 
 const CreateBoard = styled.div`
@@ -83,6 +91,18 @@ const CreateBoard = styled.div`
   border-radius: 1rem;
   padding: 0.25rem 1rem;
   font-weight: 600;
+`;
+
+const ProfileCard = styled.div`
+  text-align: center;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 3px 0px 11px 0px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin-top: 4rem;
+  font-weight: 500;
 `;
 
 export default HomePage;
