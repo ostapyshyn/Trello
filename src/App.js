@@ -19,6 +19,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 import CreateBoard from './pages/CreateBoard';
+import BoardLists from './components/BoardLists';
 
 function App() {
   const { amount } = useSelector((store) => store.tasks);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/board" element={<Board />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/boards/:board" element={<BoardLists />} />
 
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
