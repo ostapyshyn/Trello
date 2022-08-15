@@ -18,6 +18,7 @@ import Profile from './pages/Profile';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
+import CreateBoard from './pages/CreateBoard';
 
 function App() {
   const { amount } = useSelector((store) => store.tasks);
@@ -34,6 +35,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/create-board" element={<CreateBoard />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
