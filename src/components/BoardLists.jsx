@@ -36,6 +36,19 @@ const BoardLists = () => {
 
   return (
     <Main>
+      <ShareIconDiv
+        onClick={() => {
+          navigator.clipboard.writeText(window.location.href);
+          setShareLinkCopied(true);
+          setTimeout(() => {
+            setShareLinkCopied(false);
+          }, 2000);
+        }}
+      >
+        <img src={shareIcon} alt="" />
+      </ShareIconDiv>
+
+      {shareLinkCopied && <LinkCopied>Link Copied!</LinkCopied>}
       <ListingDetails className="listingName">{listing.name} board lists:</ListingDetails>
     </Main>
   );
@@ -47,7 +60,33 @@ const Main = styled.main`
   padding: 1rem;
 `;
 
+const ShareIconDiv = styled.div`
+  cursor: pointer;
+  position: fixed;
+  top: 8%;
+  right: 5%;
+  z-index: 2;
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const ListingDetails = styled.p`
   font-size: 1.5rem;
   font-weight: 800;
+`;
+
+const LinkCopied = styled.p`
+  position: fixed;
+  top: 13%;
+  right: 5%;
+  z-index: 2;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
 `;
