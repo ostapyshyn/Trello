@@ -26,6 +26,7 @@ function CreateBoard() {
           setFormData({ ...formData, userRef: user.uid });
         } else {
           navigate('/sign-in');
+          toast.error('Please log in or sign up to create a board');
         }
       });
     }
