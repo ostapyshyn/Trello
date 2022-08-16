@@ -5,6 +5,7 @@ import { getAuth } from 'firebase/auth';
 import { db } from '../lib/init-firebase';
 import Spinner from '../components/Spinner';
 import shareIcon from '../assets/svg/shareIcon.svg';
+import styled from 'styled-components';
 
 const BoardLists = () => {
   const [listing, setListing] = useState(null);
@@ -17,7 +18,6 @@ const BoardLists = () => {
 
   useEffect(() => {
     const fetchListing = async () => {
-      console.log(params.listingId);
       const docRef = doc(db, 'boards', params.board);
       const docSnap = await getDoc(docRef);
 
@@ -30,7 +30,24 @@ const BoardLists = () => {
     fetchListing();
   }, [navigate, params.listingId]);
 
-  return <div>Board Lists here</div>;
+  if (loading) {
+    return <Spinner />;
+  }
+
+  return (
+    <Main>
+      <ListingDetails className="listingName">{listing.name} board lists:</ListingDetails>
+    </Main>
+  );
 };
 
 export default BoardLists;
+
+const Main = styled.main`
+  padding: 1rem;
+`;
+
+const ListingDetails = styled.p`
+  font-size: 1.5rem;
+  font-weight: 800;
+`;
