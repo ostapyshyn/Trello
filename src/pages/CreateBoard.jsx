@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../components/Spinner';
+import styled from 'styled-components';
 
 function CreateBoard() {
   const [loading, setLoading] = useState(false);
@@ -72,27 +73,64 @@ function CreateBoard() {
 
       <main>
         <form onSubmit={onSubmit}>
-          <label className="formLabel">Sell / Rent</label>
-
-          <label className="formLabel">Name</label>
-          <input
+          <FormLabel>Board Name:</FormLabel>
+          <FormInputName
             className="formInputName"
             type="text"
             id="name"
             value={name}
             onChange={onMutate}
             maxLength="32"
-            minLength="10"
+            minLength="3"
             required
           />
 
-          <button type="submit" className="primaryButton createListingButton">
-            Create a Board
-          </button>
+          <ButtonSubmit type="submit">Create a Board</ButtonSubmit>
         </form>
       </main>
     </div>
   );
 }
+
+const FormLabel = styled.label`
+  font-weight: 600;
+  margin-top: 1rem;
+  display: block;
+`;
+
+const FormInputName = styled.input`
+  background-color: #ffffff;
+  font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0.5rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+
+  padding: 0.9rem 1rem;
+  width: 90%;
+  max-width: 326px;
+`;
+
+const ButtonSubmit = styled.button`
+  cursor: pointer;
+  background: #00cc66;
+  border-radius: 1rem;
+  padding: 0.85rem 2rem;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.25rem;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+`;
 
 export default CreateBoard;
