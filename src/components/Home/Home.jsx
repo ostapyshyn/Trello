@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { getAuth, updateProfile } from 'firebase/auth';
 
 import InputContainer from '../../components/InputContainer';
 import List from '../../components/List';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 import StoreApi from '../../utils/storeApi';
 import './styles.scss';
 import { db, timestamp } from '../../lib/init-firebase';
+
 import {
   addDoc,
   arrayUnion,
@@ -17,19 +19,43 @@ import {
   onSnapshot,
   orderBy,
   query,
+  where,
   updateDoc,
+  getDocs,
 } from 'firebase/firestore';
 // import { toast } from 'react-toastify';
 // import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
-  const [lists, setLists] = useState([]);
-  const [userId, setUserID] = useState('');
-  const isMounted = useRef(true);
   const auth = getAuth();
+
+  const [lists, setLists] = useState([]);
+  const [userId, setUserID] = useState('lol');
+  const isMounted = useRef(true);
+
   // const navigate = useNavigate();
 
   useEffect(() => {
+    // const fetchUserListings = async () => {
+    //   const listingsRef = collection(db, 'lists');
+
+    //   const q = query(listingsRef, where('userRef', '==', auth.currentUser.uid));
+
+    //   const querySnap = await getDocs(q);
+
+    //   let listings = [];
+
+    //   querySnap.forEach((doc) => {
+    //     return listings.push({
+    //       id: doc.id,
+    //       data: doc.data(),
+    //     });
+    //   });
+
+    //   setLists(listings);
+    //   // setLoading(false);
+    // };
+
     const q = query(collection(db, 'lists'), orderBy('timestamp', 'asc'));
 
     onSnapshot(q, (snapShot) => {
@@ -42,22 +68,22 @@ export default function Home() {
         })
       );
     });
-
-    if (isMounted) {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setUserID(user.uid);
-        } else {
-          // navigate('/sign-in');
-          // toast.error('Error!');
-        }
-      });
-    }
-    return () => {
-      isMounted.current = false;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMounted]);
+    // if (isMounted) {
+    //   onAuthStateChanged(auth, (user) => {
+    //     if (user) {
+    //       setUserID(user.uid);
+    //     } else {
+    //       // navigate('/sign-in');
+    //       // toast.error('Error!');
+    //     }
+    //   });
+    // }
+    // return () => {
+    //   isMounted.current = false;
+    // };
+    // // eslint-disable-next-line react-hooks/exhaustive-deps
+    // fetchUserListings();
+  }, []);
 
   const addMoreCard = async (title, listId) => {
     if (!title) {
@@ -117,7 +143,7 @@ export default function Home() {
       title,
       cards: [],
       timestamp,
-      userRef: userId,
+      // userRef: userId,
     });
   };
 
