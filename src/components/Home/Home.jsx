@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import InputContainer from '../../components/InputContainer';
 import List from '../../components/List';
-
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import StoreApi from '../../utils/storeApi';
 import './styles.scss';
 import { db, timestamp } from '../../lib/init-firebase';
@@ -19,12 +19,19 @@ import {
   query,
   updateDoc,
 } from 'firebase/firestore';
+// import { toast } from 'react-toastify';
+// import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const [lists, setLists] = useState([]);
+  const [userId, setUserID] = useState('');
+  const isMounted = useRef(true);
+  const auth = getAuth();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const q = query(collection(db, 'lists'), orderBy('timestamp', 'asc'));
+
     onSnapshot(q, (snapShot) => {
       setLists(
         snapShot.docs.map((doc) => {
@@ -35,7 +42,22 @@ export default function Home() {
         })
       );
     });
-  }, []);
+
+    if (isMounted) {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setUserID(user.uid);
+        } else {
+          // navigate('/sign-in');
+          // toast.error('Error!');
+        }
+      });
+    }
+    return () => {
+      isMounted.current = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMounted]);
 
   const addMoreCard = async (title, listId) => {
     if (!title) {
@@ -95,6 +117,7 @@ export default function Home() {
       title,
       cards: [],
       timestamp,
+      userRef: userId,
     });
   };
 
