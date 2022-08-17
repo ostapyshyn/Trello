@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { getAuth, updateProfile } from 'firebase/auth';
-
+import { useParams } from 'react-router-dom';
 import InputContainer from '../../components/InputContainer';
 import List from '../../components/List';
 
@@ -32,6 +32,7 @@ export default function Home() {
   const [lists, setLists] = useState([]);
   const [userId, setUserID] = useState('lol');
   const isMounted = useRef(true);
+  const params = useParams();
 
   // const navigate = useNavigate();
 
@@ -50,7 +51,11 @@ export default function Home() {
     //   setLists(listings);
     //   // setLoading(false);
     // };
-    const q = query(collection(db, 'lists'), where('userRef', '==', auth.currentUser.uid));
+    const q = query(
+      collection(db, 'lists'),
+      where('userRef', '==', auth.currentUser.uid),
+      where('board', '==', params.board)
+    );
     onSnapshot(q, (snapShot) => {
       setLists(
         snapShot.docs.map((doc) => {
@@ -136,6 +141,7 @@ export default function Home() {
       cards: [],
       timestamp,
       userRef: auth.currentUser.uid,
+      board: params.board,
     });
   };
 
