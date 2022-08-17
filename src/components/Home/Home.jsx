@@ -38,26 +38,19 @@ export default function Home() {
   useEffect(() => {
     // const fetchUserListings = async () => {
     //   const listingsRef = collection(db, 'lists');
-
-    //   const q = query(listingsRef, where('userRef', '==', auth.currentUser.uid));
-
+    //   const q = query(listingsRef, where('lol', '==', '123'));
     //   const querySnap = await getDocs(q);
-
     //   let listings = [];
-
     //   querySnap.forEach((doc) => {
     //     return listings.push({
     //       id: doc.id,
     //       data: doc.data(),
     //     });
     //   });
-
     //   setLists(listings);
     //   // setLoading(false);
     // };
-
-    const q = query(collection(db, 'lists'), orderBy('timestamp', 'asc'));
-
+    const q = query(collection(db, 'lists'), where('userRef', '==', auth.currentUser.uid));
     onSnapshot(q, (snapShot) => {
       setLists(
         snapShot.docs.map((doc) => {
@@ -82,8 +75,7 @@ export default function Home() {
     //   isMounted.current = false;
     // };
     // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // fetchUserListings();
-  }, []);
+  }, [auth.currentUser.uid]);
 
   const addMoreCard = async (title, listId) => {
     if (!title) {
@@ -143,7 +135,7 @@ export default function Home() {
       title,
       cards: [],
       timestamp,
-      // userRef: userId,
+      userRef: auth.currentUser.uid,
     });
   };
 
