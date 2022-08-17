@@ -8,18 +8,19 @@ import { toast } from 'react-toastify';
 import Spinner from '../components/Spinner';
 import { collection, getDocs, query, where, orderBy, limit, startAfter } from 'firebase/firestore';
 import BoardItem from '../components/BoardItem';
+import { getAuth, updateProfile } from 'firebase/auth';
 
 const HomePage = () => {
   const [boards, setBoards] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const auth = getAuth();
   const params = useParams();
 
   useEffect(() => {
     const fetchBoards = async () => {
       try {
         const boardsRef = collection(db, 'boards');
-        const q = query(boardsRef);
+        const q = query(boardsRef, where('userRef', '==', auth.currentUser.uid));
         const querySnap = await getDocs(q);
 
         const boards = [];
