@@ -6,6 +6,7 @@ import { db } from '../lib/init-firebase';
 import Spinner from '../components/Spinner';
 import shareIcon from '../assets/svg/shareIcon.svg';
 import styled from 'styled-components';
+import Home from './Home/Home';
 
 const BoardLists = () => {
   const [listing, setListing] = useState(null);
@@ -50,6 +51,7 @@ const BoardLists = () => {
 
       {shareLinkCopied && <LinkCopied>Link Copied!</LinkCopied>}
       <ListingDetails className="listingName">{listing.name} board lists:</ListingDetails>
+      <Home />
     </Main>
   );
 };
