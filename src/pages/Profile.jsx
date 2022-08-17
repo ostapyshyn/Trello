@@ -19,7 +19,7 @@ const Profile = () => {
 
   const onLogout = () => {
     auth.signOut();
-    navigate('/');
+    navigate('/about');
   };
 
   const onChange = (e) => {
