@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg';
 import trelloBoard from '../assets/svg/trelloBoard.svg';
 import styled from 'styled-components';
@@ -15,7 +15,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const auth = getAuth();
   const params = useParams();
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchBoards = async () => {
       try {
@@ -35,7 +35,8 @@ const HomePage = () => {
         setBoards(boards);
         setLoading(false);
       } catch (error) {
-        toast.error('Could not fetch listings');
+        navigate('/sign-in');
+        toast.error('Please log in');
       }
     };
 
