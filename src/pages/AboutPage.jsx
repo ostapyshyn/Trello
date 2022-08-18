@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+
 const AboutPage = () => {
+  const { email, id } = useSelector((store) => store.user);
+
   return (
     <ProfileCard>
+      <h1>{email}</h1>
+      <h2>{id}</h2>
       <h1>About us</h1>
       <h2>Hello There!</h2>
       <p>This is a demo Trello project!</p>

@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+
 import { Routes, Route, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,9 +22,10 @@ import CreateBoard from './pages/CreateBoard';
 import BoardLists from './components/BoardLists';
 
 function App() {
-  const { amount } = useSelector((store) => store.tasks);
+  
   return (
     <div className="App">
+      
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />

@@ -5,10 +5,13 @@ import { db } from '../lib/init-firebase';
 import { toast } from 'react-toastify';
 import googleIcon from '../assets/svg/googleIcon.svg';
 import styled from 'styled-components';
+import { setUser } from '../store/slices/userSlice';
+import { useDispatch } from 'react-redux';
 
 function OAuth() {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const onGoogleClick = async () => {
     try {
@@ -16,6 +19,14 @@ function OAuth() {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+
+      dispatch(
+        setUser({
+          email: user.email,
+          id: user.uid,
+          token: user.accessToken,
+        })
+      );
 
       const docRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(docRef);

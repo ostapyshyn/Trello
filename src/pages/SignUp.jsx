@@ -7,6 +7,8 @@ import { db } from '../lib/init-firebase';
 import OAuth from '../components/OAuth';
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/slices/userSlice';
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,7 +18,7 @@ function SignUp() {
     password: '',
   });
   const { name, email, password } = formData;
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onChange = (e) => {
@@ -35,6 +37,14 @@ function SignUp() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
       const user = userCredential.user;
+
+      dispatch(
+        setUser({
+          email: user.email,
+          id: user.uid,
+          token: user.accessToken,
+        })
+      );
 
       updateProfile(auth.currentUser, {
         displayName: name,

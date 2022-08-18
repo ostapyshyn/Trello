@@ -5,9 +5,12 @@ import { db } from '../lib/init-firebase';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import { removeUser } from '../store/slices/userSlice';
+import { useDispatch } from 'react-redux';
 
 const Profile = () => {
   const auth = getAuth();
+  const dispatch = useDispatch();
   const [changeDetails, setChangeDetails] = useState(false);
   const navigate = useNavigate();
 
@@ -19,6 +22,7 @@ const Profile = () => {
 
   const onLogout = () => {
     auth.signOut();
+    dispatch(removeUser());
     navigate('/about');
   };
 
