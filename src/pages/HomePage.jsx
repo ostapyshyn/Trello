@@ -16,6 +16,7 @@ const HomePage = () => {
   const auth = getAuth();
   const params = useParams();
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchBoards = async () => {
       try {
@@ -41,7 +42,7 @@ const HomePage = () => {
     };
 
     fetchBoards();
-  }, []);
+  }, [navigate]);
 
   return (
     <Wrapper>

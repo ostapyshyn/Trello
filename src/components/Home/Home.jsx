@@ -51,11 +51,7 @@ export default function Home() {
     //   setLists(listings);
     //   // setLoading(false);
     // };
-    const q = query(
-      collection(db, 'lists'),
-      where('userRef', '==', auth.currentUser.uid),
-      where('board', '==', params.board)
-    );
+    const q = query(collection(db, 'lists'), where('board', '==', params.board));
     onSnapshot(q, (snapShot) => {
       setLists(
         snapShot.docs.map((doc) => {
@@ -80,7 +76,7 @@ export default function Home() {
     //   isMounted.current = false;
     // };
     // // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth.currentUser.uid]);
+  }, [params.board]);
 
   const addMoreCard = async (title, listId) => {
     if (!title) {
