@@ -19,6 +19,9 @@ export default function InputContainer({ listId, type }) {
             {type === 'card' ? '+ Add Card' : '+ Add List'}
           </button>
         </div>
+        <button className="buttonManage" onClick={() => console.log('test')}>
+          {type === 'card' ? 'Manage tasks' : undefined}
+        </button>
       </Collapse>
     </div>
   );

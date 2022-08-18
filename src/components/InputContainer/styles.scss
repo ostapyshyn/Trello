@@ -27,3 +27,18 @@
     }
   }
 }
+
+.buttonManage {
+  cursor: pointer;
+  background: none;
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  margin: auto;
+  text-align: left;
+  opacity: 0.8;
+  font-size: 14px;
+  &:hover {
+    background-color: #ddd;
+  }
+}
