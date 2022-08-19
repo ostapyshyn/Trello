@@ -25,7 +25,7 @@ const List = ({ list, index, listID }) => {
                     {list.cards.map((card, index) => (
                       <>
                         <Card key={card.id} card={card} index={index} listId={list.id} />
-                        <h1>Testing</h1>
+                        {/* <h1>Testing</h1> */}
                       </>
                     ))}
                     {provided.placeholder}

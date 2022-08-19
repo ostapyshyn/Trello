@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 import { db } from '../lib/init-firebase';
-import List from '../components/List';
+import TaskList from '../components/TasksList';
 
 export const TaskManage = () => {
   const [lists, setLists] = useState([]);
@@ -27,7 +27,8 @@ export const TaskManage = () => {
       {lists
         .filter((list) => list.id === params.id)
         .map((list) => {
-          return <List list={list} key={list.id} />;
+          return <TaskList list={list} key={list.id} />;
+          // return <h1>{list.title}</h1>;
         })}
     </div>
   );
