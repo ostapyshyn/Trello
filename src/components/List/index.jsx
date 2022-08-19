@@ -23,10 +23,7 @@ const List = ({ list, index, listID }) => {
                     className="card-container"
                   >
                     {list.cards.map((card, index) => (
-                      <>
-                        <Card key={card.id} card={card} index={index} listId={list.id} />
-                        {/* <h1>Testing</h1> */}
-                      </>
+                      <Card key={card.id} card={card} index={index} listId={list.id} />
                     ))}
                     {provided.placeholder}
                   </div>
