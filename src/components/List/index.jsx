@@ -5,7 +5,7 @@ import Card from '../Card';
 import './styles.scss';
 import Title from '../Title';
 
-const List = ({ list, index }) => {
+const List = ({ list, index, listID }) => {
   return (
     <Draggable draggableId={list.id} index={index}>
       {(provided) => (

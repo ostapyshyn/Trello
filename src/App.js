@@ -1,4 +1,3 @@
-
 import { Routes, Route, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,12 +19,11 @@ import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 import CreateBoard from './pages/CreateBoard';
 import BoardLists from './components/BoardLists';
+import { TaskManage } from './pages/TaskManage';
 
 function App() {
-  
   return (
     <div className="App">
-      
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />
@@ -38,7 +36,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/create-board" element={<CreateBoard />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/board/tasks/:id" element={<TaskManage />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>

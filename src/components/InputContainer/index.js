@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Collapse from '@mui/material/Collapse';
-
+import { Link } from 'react-router-dom';
 import InputCard from '../InputCard';
 
 import './styles.scss';
@@ -20,9 +20,9 @@ export default function InputContainer({ listId, type }) {
           </button>
         </div>
         {type === 'card' && (
-          <button className="buttonManage" onClick={() => console.log('test')}>
-            Manage tasks
-          </button>
+          <Link to={`/board/tasks/${listId}`} className="categoryListingLink">
+            <button className="buttonManage">Manage tasks</button>
+          </Link>
         )}
       </Collapse>
     </div>

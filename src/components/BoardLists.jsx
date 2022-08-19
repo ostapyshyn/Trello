@@ -47,7 +47,7 @@ const BoardLists = () => {
           }, 2000);
         }}
       >
-        <img src={shareIcon} alt="" />
+        <img src={shareIcon} alt="shareIcon" />
       </ShareIconDiv>
 
       {shareLinkCopied && <LinkCopied>Link Copied!</LinkCopied>}
