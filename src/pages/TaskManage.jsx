@@ -56,7 +56,6 @@ export const TaskManage = () => {
               id={params.id}
             />
           );
-          // return <h1>{list.title}</h1>;
         })}
     </main>
   );
