@@ -24,7 +24,6 @@ const TaskList = ({ list, removeCard, lists, id }) => {
           ))}
         </div>
       </div>
-      {/* <InputContainer listId={list.id} type="card" /> */}
     </div>
   );
 };
