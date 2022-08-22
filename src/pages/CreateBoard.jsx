@@ -20,6 +20,8 @@ function CreateBoard() {
   const navigate = useNavigate();
   const isMounted = useRef(true);
 
+  const goBack = () => navigate(-1);
+
   useEffect(() => {
     if (isMounted) {
       onAuthStateChanged(auth, (user) => {
@@ -67,6 +69,7 @@ function CreateBoard() {
 
   return (
     <div className="profile">
+      <BackButton onClick={goBack}>Go back</BackButton>
       <header>
         <p className="pageHeader">Create a Board</p>
       </header>
@@ -131,6 +134,45 @@ const ButtonSubmit = styled.button`
   align-items: center;
   justify-content: center;
   margin-top: 5rem;
+`;
+
+const BackButton = styled.button`
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  overflow: hidden;
+  border-radius: 5px;
+  border: none;
+  background-color: #3d348b;
+  
+  &:hover {
+    border-radius: 5px;
+    padding-right: 24px;
+    padding-left: 8px;
+  }
+
+  &:hover:after {
+    opacity: 1;
+    right: 10px;
+  }
+
+  &:after {
+    content: '←';
+    position: absolute;
+    opacity: 0;
+    font-size: 20px;
+    line-height: 40px;
+    top: 0;
+    right: -20px;
+    transition: 0.4s;
+  }
 `;
 
 export default CreateBoard;
