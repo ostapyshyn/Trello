@@ -87,6 +87,8 @@ const ListofBoards = styled.ul`
   padding: 0;
 `;
 
+
+
 const CreateBoard = styled.div`
   display: flex;
   flex-direction: row;
