@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg';
 import trelloBoard from '../assets/svg/trelloBoard.svg';
@@ -16,12 +17,13 @@ const HomePage = () => {
   const auth = getAuth();
   const params = useParams();
   const navigate = useNavigate();
+  const uid = useSelector((state) => state.user.id);
 
   useEffect(() => {
     const fetchBoards = async () => {
       try {
         const boardsRef = collection(db, 'boards');
-        const q = query(boardsRef, where('userRef', '==', auth.currentUser.uid));
+        const q = query(boardsRef, where('userRef', '==', uid));
         const querySnap = await getDocs(q);
 
         const boards = [];
@@ -37,12 +39,12 @@ const HomePage = () => {
         setLoading(false);
       } catch (error) {
         navigate('/sign-in');
-        toast.error('Please log in');
+        toast.error('Please log in!');
       }
     };
 
     fetchBoards();
-  }, [navigate]);
+  }, [navigate, uid]);
 
   return (
     <Wrapper>
