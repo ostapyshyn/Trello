@@ -25,6 +25,7 @@ function OAuth() {
           email: user.email,
           id: user.uid,
           token: user.accessToken,
+          name: user.displayName,
         })
       );
 

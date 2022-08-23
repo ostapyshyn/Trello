@@ -40,6 +40,7 @@ function SignIn() {
           email: user.email,
           id: user.uid,
           token: user.accessToken,
+          name: user.displayName,
         })
       );
 
