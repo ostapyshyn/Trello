@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc, deleteDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../lib/init-firebase';
 import Spinner from '../components/Spinner';
@@ -18,6 +18,11 @@ const BoardLists = () => {
   const params = useParams();
 
   const goBack = () => navigate(-1);
+
+  const deleteBoard = async (boardId) => {
+    await deleteDoc(doc(db, 'boards', boardId));
+    navigate(-1);
+  };
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -54,6 +59,7 @@ const BoardLists = () => {
       {shareLinkCopied && <LinkCopied>Link Copied!</LinkCopied>}
 
       <BackButton onClick={goBack}>Go back</BackButton>
+      <BackButton onClick={() => deleteBoard(params.board)}>Delete board</BackButton>
       <ListingDetails className="listingName">{listing.name} board lists:</ListingDetails>
       <Home />
     </Main>
