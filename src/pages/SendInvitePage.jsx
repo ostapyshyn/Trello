@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 const SendInvitePage = () => {
   const form = useRef();
@@ -19,6 +20,7 @@ const SendInvitePage = () => {
         (result) => {
           console.log(result.text);
           console.log('message sent');
+          toast.success('Invite sent!');
           e.target.reset();
         },
         (error) => {
