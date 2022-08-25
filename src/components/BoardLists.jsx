@@ -59,7 +59,7 @@ const BoardLists = () => {
       {shareLinkCopied && <LinkCopied>Link Copied!</LinkCopied>}
 
       <BackButton onClick={goBack}>Go back</BackButton>
-      <BackButton onClick={() => deleteBoard(params.board)}>Delete board</BackButton>
+      <DeleteButton onClick={() => deleteBoard(params.board)}>Delete board</DeleteButton>
       <ListingDetails className="listingName">{listing.name} board lists:</ListingDetails>
       <Home />
     </Main>
@@ -139,5 +139,27 @@ const BackButton = styled.button`
     top: 0;
     right: -20px;
     transition: 0.4s;
+  }
+`;
+
+const DeleteButton = styled.button`
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background-color: #ef233c;
+  box-shadow: 0 3px 1px -2px #ccc, 0 2px 2px 0 #ccc, 0 1px 5px 0 #ccc;
+  margin-left: 30px;
+
+  &:active {
+    box-shadow: 0 4px 2px -3px #ccc, 0 4px 5px 1px #ccc, 0 2px 7px 1px #ccc;
   }
 `;
