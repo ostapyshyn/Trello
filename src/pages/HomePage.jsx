@@ -14,8 +14,6 @@ import { getAuth, updateProfile } from 'firebase/auth';
 const HomePage = () => {
   const [boards, setBoards] = useState(null);
   const [loading, setLoading] = useState(true);
-  const auth = getAuth();
-  const params = useParams();
   const navigate = useNavigate();
   const uid = useSelector((state) => state.user.id);
 
@@ -86,8 +84,6 @@ const ListofBoards = styled.ul`
   flex-wrap: wrap;
   padding: 0;
 `;
-
-
 
 const CreateBoard = styled.div`
   display: flex;
