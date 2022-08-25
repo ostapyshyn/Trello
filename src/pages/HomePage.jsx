@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg';
 import trelloBoard from '../assets/svg/trelloBoard.svg';
 import styled from 'styled-components';
 import { db } from '../lib/init-firebase';
 import { toast } from 'react-toastify';
 import Spinner from '../components/Spinner';
-import { collection, getDocs, query, where, orderBy, limit, startAfter } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import BoardItem from '../components/BoardItem';
-import { getAuth, updateProfile } from 'firebase/auth';
 
 const HomePage = () => {
   const [boards, setBoards] = useState(null);
