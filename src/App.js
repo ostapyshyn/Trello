@@ -14,6 +14,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import CreateBoard from './pages/CreateBoard';
 import BoardLists from './components/BoardLists';
 import { TaskManage } from './pages/TaskManage';
+import SendInvitePage from './pages/SendInvitePage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/create-board" element={<CreateBoard />} />
           <Route path="/board/tasks/:id" element={<TaskManage />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/send-invite" element={<SendInvitePage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
       </Routes>
