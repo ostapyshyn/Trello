@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../components/Spinner';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 function CreateBoard() {
   const [loading, setLoading] = useState(false);
@@ -15,6 +16,7 @@ function CreateBoard() {
     name: '',
   });
   const { name } = formData;
+  const { email } = useSelector((state) => state.user);
 
   const auth = getAuth();
   const navigate = useNavigate();
@@ -46,6 +48,7 @@ function CreateBoard() {
     const formDataCopy = {
       ...formData,
       timestamp: serverTimestamp(),
+      users: [email],
     };
 
     const docRef = await addDoc(collection(db, 'boards'), formDataCopy);
@@ -151,7 +154,7 @@ const BackButton = styled.button`
   border-radius: 5px;
   border: none;
   background-color: #3d348b;
-  
+
   &:hover {
     border-radius: 5px;
     padding-right: 24px;

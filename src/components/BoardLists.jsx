@@ -60,7 +60,7 @@ const BoardLists = () => {
 
       <BackButton onClick={goBack}>Go back</BackButton>
       <DeleteButton onClick={() => deleteBoard(params.board)}>Delete board</DeleteButton>
-      <Link style={{ display: 'revert' }} to="/send-invite">
+      <Link style={{ display: 'revert' }} to="/send-invite" state={params.board}>
         <InviteUserButton>Invite a user</InviteUserButton>
       </Link>
 

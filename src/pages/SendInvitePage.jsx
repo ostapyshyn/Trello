@@ -2,12 +2,27 @@ import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { db } from '../lib/init-firebase';
+import { useLocation } from 'react-router-dom';
 
 const SendInvitePage = () => {
   const form = useRef();
+  const location = useLocation();
+  const board = location.state;
+
+  const addMoreUsers = async (email, boardId) => {
+    const boardRef = doc(db, 'boards', boardId);
+
+    await updateDoc(boardRef, {
+      users: arrayUnion(email),
+    });
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
+
+    addMoreUsers('test@gmail.com', board);
 
     emailjs
       .sendForm(
