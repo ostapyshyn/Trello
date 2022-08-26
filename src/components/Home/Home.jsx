@@ -17,11 +17,9 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
-  orderBy,
   query,
   where,
   updateDoc,
-  getDocs,
 } from 'firebase/firestore';
 // import { toast } from 'react-toastify';
 // import { useNavigate } from 'react-router-dom';

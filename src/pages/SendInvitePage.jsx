@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
@@ -11,6 +11,12 @@ const SendInvitePage = () => {
   const location = useLocation();
   const board = location.state;
 
+  const [formData, setFormData] = useState({
+    email: '',
+  });
+
+  const { email } = formData;
+
   const addMoreUsers = async (email, boardId) => {
     const boardRef = doc(db, 'boards', boardId);
 
@@ -19,10 +25,17 @@ const SendInvitePage = () => {
     });
   };
 
+  const onMutate = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+
   const sendEmail = (e) => {
     e.preventDefault();
 
-    addMoreUsers('test@gmail.com', board);
+    addMoreUsers(email, board);
 
     emailjs
       .sendForm(
@@ -49,14 +62,21 @@ const SendInvitePage = () => {
       <StyledContactForm>
         <form ref={form} onSubmit={sendEmail}>
           <label>User name</label>
-          <input type="text" name="user_name" />
+          <input type="text" name="user_name" required />
           <label>From who</label>
           <input type="text" name="from_name" />
           <label>Email</label>
-          <input type="email" name="user_email" />
+          <input
+            type="email"
+            name="user_email"
+            id="email"
+            value={email}
+            onChange={onMutate}
+            required
+          />
           <label>Message</label>
           <textarea name="message" />
-          <input type="submit" value="Send" />
+          <input type="submit" value="Send" required />
         </form>
       </StyledContactForm>
     </main>

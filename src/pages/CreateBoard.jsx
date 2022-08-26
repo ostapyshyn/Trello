@@ -5,7 +5,6 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/init-firebase';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../components/Spinner';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
