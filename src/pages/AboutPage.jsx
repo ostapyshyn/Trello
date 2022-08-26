@@ -11,6 +11,7 @@ const AboutPage = () => {
       <h2>Hello {name}❗️</h2>
       <p>This is a demo Trello project!</p>
       <p>Technologies: React, Redux, Firebase</p>
+      <p>&copy; {new Date().getFullYear()}</p>
     </ProfileCard>
   );
 };
