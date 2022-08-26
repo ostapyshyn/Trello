@@ -16,11 +16,11 @@ export default function InputContainer({ listId, type }) {
       <Collapse in={!open}>
         <div className="input-content">
           <button onClick={() => setOpen(!open)}>
-            {type === 'card' ? '+ Add Card' : '+ Add List'}
+            {type === 'card' ? '+ Add Task' : '+ Add List'}
           </button>
         </div>
         {type === 'card' && (
-          <Link to={`/board/tasks/${listId}`} className="categoryListingLink">
+          <Link to={`/board/tasks/${listId}`} className="categoryButtonLink">
             <button className="buttonManage">Manage tasks</button>
           </Link>
         )}

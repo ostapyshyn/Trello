@@ -60,7 +60,6 @@ const HomePage = () => {
         <>
           <main>
             <ListofBoards>
-              {console.log(boards)}
               {boards
                 .filter((item) => item.data.users.includes(email))
                 .map((board) => (

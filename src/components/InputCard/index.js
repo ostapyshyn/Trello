@@ -30,13 +30,13 @@ export default function InputCard({ setOpen, listId, type }) {
           onChange={handleOnChange}
           value={title}
           className="input-text"
-          placeholder={type === 'card' ? 'Enter a title of this card...' : 'Enter list title'}
+          placeholder={type === 'card' ? 'Enter a title of this task...' : 'Enter list title'}
           autoFocus
         />
       </div>
       <div className="confirm">
         <button className="button-confirm" onClick={handleBtnConfirm}>
-          {type === 'card' ? 'Add Card' : 'Add List'}
+          {type === 'card' ? 'Add Task' : 'Add List'}
         </button>
         <button
           className="button-cancel"
