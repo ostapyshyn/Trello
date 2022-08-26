@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import DeleteOutline from '@mui/icons-material/DeleteOutline';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Draggable } from 'react-beautiful-dnd';
 
 import storeApi from '../../utils/storeApi';
@@ -40,13 +41,20 @@ export default function Card({ card, index, listId }) {
               />
             ) : (
               <div onClick={() => setOpen(!open)} className="card-title-container">
-                <p>{card.title}</p>
+                <p style={{ flex: 1 }}>{card.title}</p>
                 <button
                   onClick={() => {
                     removeCard(index, listId, card.id);
                   }}
                 >
                   <DeleteOutline />
+                </button>
+                <button
+                  onClick={() => {
+                    console.log('add ueser');
+                  }}
+                >
+                  <PersonAddIcon />
                 </button>
               </div>
             )}
