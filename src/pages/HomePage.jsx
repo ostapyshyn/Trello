@@ -15,12 +15,13 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const uid = useSelector((state) => state.user.id);
+  const email = useSelector((state) => state.user.email);
 
   useEffect(() => {
     const fetchBoards = async () => {
       try {
         const boardsRef = collection(db, 'boards');
-        const q = query(boardsRef, where('userRef', '==', uid));
+        const q = query(boardsRef);
         const querySnap = await getDocs(q);
 
         const boards = [];
@@ -59,9 +60,12 @@ const HomePage = () => {
         <>
           <main>
             <ListofBoards>
-              {boards.map((board) => (
-                <BoardItem boardData={board.data} id={board.id} key={board.id} />
-              ))}
+              {console.log(boards)}
+              {boards
+                .filter((item) => item.data.users.includes(email))
+                .map((board) => (
+                  <BoardItem boardData={board.data} id={board.id} key={board.id} />
+                ))}
             </ListofBoards>
           </main>
         </>
