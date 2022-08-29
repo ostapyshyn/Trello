@@ -45,15 +45,13 @@ export default function Card({ card, index, listId }) {
                 <button
                   onClick={() => {
                     removeCard(index, listId, card.id);
-                  }}
-                >
+                  }}>
                   <DeleteOutline />
                 </button>
                 <button
                   onClick={() => {
                     console.log('add ueser');
-                  }}
-                >
+                  }}>
                   <PersonAddIcon />
                 </button>
               </div>
