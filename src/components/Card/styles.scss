@@ -1,7 +1,7 @@
 .card-content {
   min-height: 2.5rem;
 
-  display: flex;
+  // display: flex;
   justify-content: space-between;
   align-items: flex-start;
 
@@ -22,7 +22,6 @@
     align-items: flex-start;
 
     font-size: 15px;
-
     transition: background-color 0.1s;
 
     p {
@@ -90,8 +89,8 @@
     padding: 18px;
     box-sizing: border-box;
     position: relative;
-    top: 15px;
-    left: -70px;
+    top: 0px;
+    left: 12px;
 
     .button {
       width: 100%;
@@ -152,6 +151,30 @@
 
     &:active {
       background: darken(#f4f6f8, 6%);
+    }
+  }
+}
+
+.task-title-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    padding: 8px;
+    padding-top: 12px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    svg {
+      transition: color 0.2s, opacity 0.2s;
+
+      &:hover {
+        color: red;
+      }
     }
   }
 }

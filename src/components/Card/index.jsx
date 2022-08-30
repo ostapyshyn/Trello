@@ -56,14 +56,16 @@ export default function Card({ card, index, listId }) {
                 autoFocus
               />
             ) : (
-              <div onClick={() => setOpen(!open)} className="card-title-container">
-                <p style={{ flex: 1 }}>{card.title}</p>
-                <button
-                  onClick={() => {
-                    removeCard(index, listId, card.id);
-                  }}>
-                  <DeleteOutline />
-                </button>
+              <div className="task-title-btn">
+                <div onClick={() => setOpen(!open)} className="card-title-container">
+                  <p style={{ flex: 1 }}>{card.title}</p>
+                  <button
+                    onClick={() => {
+                      removeCard(index, listId, card.id);
+                    }}>
+                    <DeleteOutline />
+                  </button>
+                </div>
                 <button onClick={() => setVisiblePopup(true)}>
                   <PersonAddIcon />
                 </button>
