@@ -1,14 +1,25 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import DeleteOutline from '@mui/icons-material/DeleteOutline';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import closeSvg from '../../assets/svg/close.svg';
 import { Draggable } from 'react-beautiful-dnd';
-
+import { db } from '../../lib/init-firebase';
 import storeApi from '../../utils/storeApi';
-
+import { useParams } from 'react-router-dom';
 import './styles.scss';
+
+import {
+  arrayUnion,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  where,
+  updateDoc,
+} from 'firebase/firestore';
 
 export default function Card({ card, index, listId }) {
   const [open, setOpen] = useState(false);
@@ -16,6 +27,8 @@ export default function Card({ card, index, listId }) {
   const [visiblePopup, setVisiblePopup] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const { removeCard, updateCardTitle } = useContext(storeApi);
+  const [lists, setLists] = useState([]);
+  const params = useParams();
 
   const handleOnBlur = (cardId) => {
     updateCardTitle(newTitle, index, listId);
@@ -27,12 +40,53 @@ export default function Card({ card, index, listId }) {
     setInputValue('');
   };
 
+  useEffect(() => {
+    const q = query(collection(db, 'lists'), where('board', '==', params.board));
+    onSnapshot(q, (snapShot) => {
+      setLists(
+        snapShot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+        }),
+      );
+    });
+  }, [params.board]);
+
+  const addUserEmail = (usr_email, index, listId, cardId, lists) => {
+    const listRef = doc(db, 'lists', listId);
+
+    console.log('usr_email+:', usr_email);
+    console.log('listId+:', listId);
+    console.log('index:', index);
+    console.log('cardId+:', cardId);
+    console.log('lists+:', lists);
+
+    lists.forEach(async (list) => {
+      if (list.id === listId) {
+        // list.cards[index].title = usr_email;
+        await updateDoc(listRef, {
+          cards: list.cards.map((card) => {
+            if (card.id === cardId) {
+              card.users.push(usr_email);
+              return card;
+            }
+            return card;
+          }),
+        });
+      }
+      return list;
+    });
+  };
+
   const addList = () => {
     if (!inputValue) {
       alert('Enter user email');
       return;
     }
-    console.log(inputValue);
+
+    addUserEmail(inputValue, index, listId, card.id, lists);
   };
 
   return (
