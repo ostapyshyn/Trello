@@ -70,12 +70,12 @@ export default function Card({ card, index, listId }) {
               </div>
             )}
             {visiblePopup && (
-              <div className="add-list__popup">
+              <div className="add-email__popup">
                 <img
                   onClick={onClose}
                   src={closeSvg}
                   alt="Close button"
-                  className="add-list__popup-close-btn"
+                  className="add-email__popup-close-btn"
                 />
 
                 <input
