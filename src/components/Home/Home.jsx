@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { getAuth, updateProfile } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { useParams } from 'react-router-dom';
 import InputContainer from '../../components/InputContainer';
 import List from '../../components/List';
-
+import { useSelector } from 'react-redux';
 import StoreApi from '../../utils/storeApi';
 import './styles.scss';
 import { db, timestamp } from '../../lib/init-firebase';
@@ -32,6 +32,8 @@ export default function Home() {
   const isMounted = useRef(true);
   const params = useParams();
 
+  const { email } = useSelector((state) => state.user);
+
   // const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function Home() {
             id: doc.id,
             ...doc.data(),
           };
-        })
+        }),
       );
     });
     // if (isMounted) {
@@ -84,6 +86,7 @@ export default function Home() {
     const newCard = {
       id: newCardId,
       title,
+      users: [email],
     };
     const listRef = doc(db, 'lists', listId);
 
@@ -224,8 +227,7 @@ export default function Home() {
         removeCard,
         updateCardTitle,
         deleteList,
-      }}
-    >
+      }}>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="app" type="list" direction="horizontal">
           {(provided) => (
