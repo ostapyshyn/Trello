@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import DeleteOutline from '@mui/icons-material/DeleteOutline';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import closeSvg from '../../assets/svg/close.svg';
 import { Draggable } from 'react-beautiful-dnd';
 
 import storeApi from '../../utils/storeApi';
@@ -12,11 +13,26 @@ import './styles.scss';
 export default function Card({ card, index, listId }) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState(card.title);
+  const [visiblePopup, setVisiblePopup] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   const { removeCard, updateCardTitle } = useContext(storeApi);
 
   const handleOnBlur = (cardId) => {
     updateCardTitle(newTitle, index, listId);
     setOpen(!open);
+  };
+
+  const onClose = () => {
+    setVisiblePopup(false);
+    setInputValue('');
+  };
+
+  const addList = () => {
+    if (!inputValue) {
+      alert('Enter user email');
+      return;
+    }
+    console.log(inputValue);
   };
 
   return (
@@ -48,11 +64,29 @@ export default function Card({ card, index, listId }) {
                   }}>
                   <DeleteOutline />
                 </button>
-                <button
-                  onClick={() => {
-                    console.log('add ueser');
-                  }}>
+                <button onClick={() => setVisiblePopup(true)}>
                   <PersonAddIcon />
+                </button>
+              </div>
+            )}
+            {visiblePopup && (
+              <div className="add-list__popup">
+                <img
+                  onClick={onClose}
+                  src={closeSvg}
+                  alt="Close button"
+                  className="add-list__popup-close-btn"
+                />
+
+                <input
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  className="field"
+                  type="text"
+                  placeholder="Enter user email"
+                />
+                <button onClick={addList} className="button">
+                  {'Assign task to a user'}
                 </button>
               </div>
             )}
