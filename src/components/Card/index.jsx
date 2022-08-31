@@ -123,6 +123,11 @@ export default function Card({ card, index, listId }) {
       return;
     }
 
+    if (checkDuplicates(inputValue)) {
+      alert('User already added');
+      return;
+    }
+
     addUserEmail(inputValue, index, listId, card.id, lists);
   };
 
@@ -130,6 +135,12 @@ export default function Card({ card, index, listId }) {
     let list = users.filter((user) => user.id === listId);
     let newlist = list[0].cards.filter((cards) => cards.id === card.id);
     return newlist[0].users.map((user, index) => <div key={index}>{user}</div>);
+  }
+
+  function checkDuplicates(email) {
+    let list = users.filter((user) => user.id === listId);
+    let newlist = list[0].cards.filter((cards) => cards.id === card.id);
+    return newlist[0].users.includes(email);
   }
 
   return (
