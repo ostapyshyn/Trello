@@ -106,14 +106,7 @@ export default function Card({ card, index, listId }) {
 
   function showEmails() {
     let list = users.filter((user) => user.id === listId);
-    // .map((user) => (
-    //   <div key={user.timestamp}>
-    //     <span>{user.id}</span>
-    //   </div>
-    // ));
-
     let newlist = list[0].cards.filter((cards) => cards.id === card.id);
-
     return newlist[0].users.map((user) => <div key={user}>{user}</div>);
   }
 
@@ -153,16 +146,21 @@ export default function Card({ card, index, listId }) {
                 </button>
               </div>
             )}
-            {visiblePopup && (
-              <div className="add-email__popup">
+          </div>
+          {visiblePopup && (
+            <div className="add-email__popup">
+              <div>
                 <img
                   onClick={onClose}
                   src={closeSvg}
                   alt="Close button"
                   className="add-email__popup-close-btn"
                 />
-                {'Task users:'}
+                {<p>Task users:</p>}
                 {showEmails()}
+              </div>
+
+              <div className="addUser">
                 <input
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
@@ -174,8 +172,8 @@ export default function Card({ card, index, listId }) {
                   {'Assign task to a user'}
                 </button>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       )}
     </Draggable>
