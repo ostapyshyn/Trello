@@ -28,6 +28,7 @@ export default function Card({ card, index, listId }) {
   const [inputValue, setInputValue] = useState('');
   const { removeCard, updateCardTitle } = useContext(storeApi);
   const [lists, setLists] = useState([]);
+  const [users, setUsers] = useState([]);
   const params = useParams();
 
   const handleOnBlur = (cardId) => {
@@ -52,6 +53,18 @@ export default function Card({ card, index, listId }) {
         }),
       );
     });
+
+    const users = query(collection(db, 'lists'));
+    onSnapshot(users, (snapShot) => {
+      setUsers(
+        snapShot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+        }),
+      );
+    });
   }, [params.board]);
 
   const addUserEmail = (usr_email, index, listId, cardId, lists) => {
@@ -62,6 +75,8 @@ export default function Card({ card, index, listId }) {
     console.log('index:', index);
     console.log('cardId+:', cardId);
     console.log('lists+:', lists);
+    console.log('board:', lists.users);
+    console.log('users:', users);
 
     lists.forEach(async (list) => {
       if (list.id === listId) {
@@ -88,6 +103,19 @@ export default function Card({ card, index, listId }) {
 
     addUserEmail(inputValue, index, listId, card.id, lists);
   };
+
+  function showEmails() {
+    let list = users.filter((user) => user.id === listId);
+    // .map((user) => (
+    //   <div key={user.timestamp}>
+    //     <span>{user.id}</span>
+    //   </div>
+    // ));
+
+    let newlist = list[0].cards.filter((cards) => cards.id === card.id);
+
+    return newlist[0].users.map((user) => <div key={user}>{user}</div>);
+  }
 
   return (
     <Draggable draggableId={card.id} index={index}>
@@ -133,7 +161,8 @@ export default function Card({ card, index, listId }) {
                   alt="Close button"
                   className="add-email__popup-close-btn"
                 />
-
+                {'Task users:'}
+                {showEmails()}
                 <input
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
