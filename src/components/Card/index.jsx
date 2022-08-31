@@ -29,6 +29,7 @@ export default function Card({ card, index, listId }) {
   const { removeCard, updateCardTitle } = useContext(storeApi);
   const [lists, setLists] = useState([]);
   const [users, setUsers] = useState([]);
+  const [boards, setBoards] = useState([]);
   const params = useParams();
 
   const handleOnBlur = (cardId) => {
@@ -65,18 +66,30 @@ export default function Card({ card, index, listId }) {
         }),
       );
     });
+
+    const boards = query(collection(db, 'boards'));
+    onSnapshot(boards, (snapShot) => {
+      setBoards(
+        snapShot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+        }),
+      );
+    });
   }, [params.board]);
 
   const addUserEmail = (usr_email, index, listId, cardId, lists) => {
     const listRef = doc(db, 'lists', listId);
 
-    console.log('usr_email+:', usr_email);
-    console.log('listId+:', listId);
-    console.log('index:', index);
-    console.log('cardId+:', cardId);
-    console.log('lists+:', lists);
-    console.log('board:', lists.users);
-    console.log('users:', users);
+    // console.log('usr_email+:', usr_email);
+    // console.log('listId+:', listId);
+    // console.log('index:', index);
+    // console.log('cardId+:', cardId);
+    // console.log('lists+:', lists);
+    // console.log('board:', lists.users);
+    // console.log('users:', users);
 
     lists.forEach(async (list) => {
       if (list.id === listId) {
@@ -95,9 +108,18 @@ export default function Card({ card, index, listId }) {
     });
   };
 
+  function checkEmail(email) {
+    let board = boards.filter((board) => board.id === params.board);
+    return board[0].users.includes(email);
+  }
+
   const addList = () => {
     if (!inputValue) {
       alert('Enter user email');
+      return;
+    }
+    if (!checkEmail(inputValue)) {
+      alert('User should be invited to the board');
       return;
     }
 
@@ -107,7 +129,7 @@ export default function Card({ card, index, listId }) {
   function showEmails() {
     let list = users.filter((user) => user.id === listId);
     let newlist = list[0].cards.filter((cards) => cards.id === card.id);
-    return newlist[0].users.map((user) => <div key={user}>{user}</div>);
+    return newlist[0].users.map((user, index) => <div key={index}>{user}</div>);
   }
 
   return (
