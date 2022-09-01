@@ -97,7 +97,7 @@ const SendInvitePage = () => {
       }}>
       <h2>Current board users:</h2>
       {showUsers()}
-      <h2>Invite users to the board:</h2>
+      <h2>Invite a user to the board:</h2>
       <StyledContactForm>
         <form ref={form} onSubmit={sendEmail}>
           <label>User name</label>

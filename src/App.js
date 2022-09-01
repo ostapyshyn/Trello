@@ -29,13 +29,13 @@ function App() {
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
-          <Route path="/sign-in" element={<SignIn />} />
           <Route path="/create-board" element={<CreateBoard />} />
           <Route path="/board/tasks/:id" element={<TaskManage />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/send-invite" element={<SendInvitePage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
+        <Route path="/sign-in" element={<SignIn />} />
       </Routes>
       <ToastContainer />
     </div>

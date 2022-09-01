@@ -26,7 +26,7 @@ function OAuth() {
           id: user.uid,
           token: user.accessToken,
           name: user.displayName,
-        })
+        }),
       );
 
       const docRef = doc(db, 'users', user.uid);
@@ -47,7 +47,9 @@ function OAuth() {
 
   return (
     <SocialLogin>
-      <p>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} with </p>
+      <p style={{ color: ' #00cc66' }}>
+        Sign {location.pathname === '/sign-up' ? 'up' : 'in'} with{' '}
+      </p>
       <ButtonIcon onClick={onGoogleClick}>
         <GoogleImage src={googleIcon} alt="google"></GoogleImage>
       </ButtonIcon>
