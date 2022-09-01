@@ -1,19 +1,34 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, updateDoc, onSnapshot, query, collection } from 'firebase/firestore';
 import { db } from '../lib/init-firebase';
 import { useLocation } from 'react-router-dom';
 
 const SendInvitePage = () => {
-  const form = useRef();
-  const location = useLocation();
-  const board = location.state;
-
+  const [boards, setBoards] = useState([]);
   const [formData, setFormData] = useState({
     email: '',
   });
+
+  const form = useRef();
+  const location = useLocation();
+  const board_id = location.state;
+
+  useEffect(() => {
+    const boards = query(collection(db, 'boards'));
+    onSnapshot(boards, (snapShot) => {
+      setBoards(
+        snapShot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+        }),
+      );
+    });
+  }, []);
 
   const { email } = formData;
 
@@ -32,17 +47,32 @@ const SendInvitePage = () => {
     }));
   };
 
+  function showUsers() {
+    let board = boards.filter((board) => board.id === board_id);
+
+    let users = board[0]?.users;
+    console.log(users);
+
+    return users?.map((user) => {
+      return (
+        <div>
+          <p>{user}</p>
+        </div>
+      );
+    });
+  }
+
   const sendEmail = (e) => {
     e.preventDefault();
 
-    addMoreUsers(email, board);
+    addMoreUsers(email, board_id);
 
     emailjs
       .sendForm(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
         process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
         form.current,
-        process.env.REACT_APP_EMAILJS_USER_ID
+        process.env.REACT_APP_EMAILJS_USER_ID,
       )
       .then(
         (result) => {
@@ -53,18 +83,25 @@ const SendInvitePage = () => {
         },
         (error) => {
           console.log(error.text);
-        }
+        },
       );
   };
 
   return (
-    <main style={{ display: 'flex', justifyContent: 'center' }}>
+    <main
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
+      <h2>Current board users:</h2>
+      {showUsers()}
+      <h2>Invite users to the board:</h2>
       <StyledContactForm>
         <form ref={form} onSubmit={sendEmail}>
           <label>User name</label>
           <input type="text" name="user_name" required />
-          <label>From who</label>
-          <input type="text" name="from_name" />
           <label>Email</label>
           <input
             type="email"
