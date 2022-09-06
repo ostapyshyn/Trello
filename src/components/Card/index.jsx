@@ -19,7 +19,9 @@ import {
   query,
   where,
   updateDoc,
+  documentId,
 } from 'firebase/firestore';
+import { useRef } from 'react';
 
 export default function Card({ card, index, listId }) {
   const [open, setOpen] = useState(false);
@@ -40,7 +42,23 @@ export default function Card({ card, index, listId }) {
   const onClose = () => {
     setVisiblePopup(false);
     setInputValue('');
+    console.log('onClose');
   };
+
+  const emailRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (emailRef.current && !emailRef.current.contains(event.target)) {
+        setVisiblePopup(false);
+        setInputValue('');
+      }
+    };
+    document.body.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
 
   useEffect(() => {
     const q = query(collection(db, 'lists'), where('board', '==', params.board));
@@ -181,7 +199,7 @@ export default function Card({ card, index, listId }) {
             )}
           </div>
           {visiblePopup && (
-            <div className="add-email__popup">
+            <div ref={emailRef} className="add-email__popup">
               <div>
                 <img
                   onClick={onClose}
