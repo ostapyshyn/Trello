@@ -20,8 +20,10 @@ const BoardLists = () => {
   const goBack = () => navigate(-1);
 
   const deleteBoard = async (boardId) => {
-    await deleteDoc(doc(db, 'boards', boardId));
-    navigate(-1);
+    if (window.confirm('Are you sure you want to delete this board?')) {
+      await deleteDoc(doc(db, 'boards', boardId));
+      navigate(-1);
+    }
   };
 
   useEffect(() => {
@@ -51,8 +53,7 @@ const BoardLists = () => {
           setTimeout(() => {
             setShareLinkCopied(false);
           }, 2000);
-        }}
-      >
+        }}>
         <img src={shareIcon} alt="shareIcon" />
       </ShareIconDiv>
 
