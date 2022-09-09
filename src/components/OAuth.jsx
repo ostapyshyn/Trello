@@ -5,7 +5,7 @@ import { db } from '../lib/init-firebase';
 import { toast } from 'react-toastify';
 import googleIcon from '../assets/svg/googleIcon.svg';
 import styled from 'styled-components';
-import { setUser } from '../store/slices/userSlice';
+import { setUser } from '../redux/slices/userSlice';
 import { useDispatch } from 'react-redux';
 
 function OAuth() {

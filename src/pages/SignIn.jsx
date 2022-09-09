@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import OAuth from '../components/OAuth';
-import { setUser } from '../store/slices/userSlice';
+import { setUser } from '../redux/slices/userSlice';
 
 import board from '../assets/back-img-min.jpg';
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';

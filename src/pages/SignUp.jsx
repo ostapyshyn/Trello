@@ -8,7 +8,7 @@ import OAuth from '../components/OAuth';
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../store/slices/userSlice';
+import { setUser } from '../redux/slices/userSlice';
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);

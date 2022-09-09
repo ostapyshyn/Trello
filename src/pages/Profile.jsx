@@ -5,7 +5,7 @@ import { db } from '../lib/init-firebase';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
-import { removeUser } from '../store/slices/userSlice';
+import { removeUser } from '../redux/slices/userSlice';
 import { useDispatch } from 'react-redux';
 
 const Profile = () => {
