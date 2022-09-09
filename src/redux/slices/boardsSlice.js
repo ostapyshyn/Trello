@@ -1,11 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-  board: {
-    id: null,
-    name: null,
-  },
+  status: null,
+  error: null,
+  boards: [],
 };
+
+export const fetchBoards = createAsyncThunk('board/fetchBoards', async (params) => {
+  const { name } = params;
+
+  const { data } = await axios.get('http/items/url');
+
+  return data;
+});
 
 const boardSlice = createSlice({
   name: 'board',

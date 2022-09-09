@@ -2,9 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
-import { arrayUnion, doc, updateDoc, onSnapshot, query, collection } from 'firebase/firestore';
-import { db } from '../lib/init-firebase';
 import { useLocation } from 'react-router-dom';
+import { arrayUnion, doc, updateDoc, onSnapshot, query, collection } from 'firebase/firestore';
+import { useDispatch, useSelector } from 'react-redux';
+import { db } from '../lib/init-firebase';
+
+import { fetchBoards } from '../../store/slices/usersSlice';
 
 const SendInvitePage = () => {
   const [boards, setBoards] = useState([]);
@@ -12,9 +15,15 @@ const SendInvitePage = () => {
     email: '',
   });
 
+  const dispatch = useDispatch();
+
   const form = useRef();
   const location = useLocation();
   const board_id = location.state;
+
+  const getBoards = async () => {
+    dispatch(fetchBoards());
+  };
 
   useEffect(() => {
     const boards = query(collection(db, 'boards'));
