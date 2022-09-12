@@ -7,7 +7,7 @@ import { arrayUnion, doc, updateDoc, onSnapshot, query, collection } from 'fireb
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../lib/init-firebase';
 
-import { fetchBoards } from '../../store/slices/usersSlice';
+import { fetchBoards } from '../redux/slices/boardsSlice';
 
 const SendInvitePage = () => {
   const [boards, setBoards] = useState([]);
