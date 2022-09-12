@@ -26,17 +26,18 @@ const SendInvitePage = () => {
   };
 
   useEffect(() => {
-    const boards = query(collection(db, 'boards'));
-    onSnapshot(boards, (snapShot) => {
-      setBoards(
-        snapShot.docs.map((doc) => {
-          return {
-            id: doc.id,
-            ...doc.data(),
-          };
-        }),
-      );
-    });
+    // const boards = query(collection(db, 'boards'));
+    // onSnapshot(boards, (snapShot) => {
+    //   setBoards(
+    //     snapShot.docs.map((doc) => {
+    //       return {
+    //         id: doc.id,
+    //         ...doc.data(),
+    //       };
+    //     }),
+    //   );
+    // });
+    getBoards();
   }, []);
 
   const { email } = formData;
