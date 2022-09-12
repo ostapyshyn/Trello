@@ -46,7 +46,7 @@ function CreateBoard() {
 
     const formDataCopy = {
       ...formData,
-      timestamp: serverTimestamp(),
+      // timestamp: serverTimestamp(),
       users: [email],
     };
 

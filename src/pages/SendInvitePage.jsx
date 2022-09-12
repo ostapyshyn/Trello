@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import emailjs from '@emailjs/browser';
-import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
 import { arrayUnion, doc, updateDoc, onSnapshot, query, collection } from 'firebase/firestore';
-import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { db } from '../lib/init-firebase';
 
 import { fetchBoards } from '../redux/slices/boardsSlice';
@@ -38,7 +38,7 @@ const SendInvitePage = () => {
     //   );
     // });
     getBoards();
-  }, []);
+  }, [getBoards]);
 
   const { email } = formData;
 

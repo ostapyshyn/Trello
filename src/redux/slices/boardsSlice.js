@@ -1,5 +1,8 @@
-import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { collection, getDocs } from 'firebase/firestore';
+
+import { STATUSES } from '../data';
+import { db } from '../../lib/init-firebase';
 
 const initialState = {
   status: null,
@@ -7,12 +10,13 @@ const initialState = {
   boards: [],
 };
 
-export const fetchBoards = createAsyncThunk('board/fetchBoards', async (params) => {
-  const { name } = params;
-
-  const { data } = await axios.get('http/items/url');
-
-  return data;
+export const fetchBoards = createAsyncThunk('board/fetchBoards', async (_, { rejectWithValue }) => {
+  try {
+    const docsSnap = await getDocs(collection(db, 'boards'));
+    return docsSnap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  } catch (err) {
+    return rejectWithValue(STATUSES.failed);
+  }
 });
 
 const boardSlice = createSlice({
@@ -38,6 +42,7 @@ const boardSlice = createSlice({
       state.status = 'success';
     },
     [fetchBoards.rejected]: (state, action) => {
+      state.error = action.payload;
       state.status = 'error';
       state.items = [];
     },
