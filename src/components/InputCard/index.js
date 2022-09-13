@@ -43,8 +43,7 @@ export default function InputCard({ setOpen, listId, type }) {
           onClick={() => {
             setTitle('');
             setOpen(false);
-          }}
-        >
+          }}>
           <ClearIcon />
         </button>
       </div>

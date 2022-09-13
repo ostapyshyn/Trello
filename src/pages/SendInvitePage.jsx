@@ -5,7 +5,10 @@ import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
 import { arrayUnion, doc, updateDoc, onSnapshot, query, collection } from 'firebase/firestore';
 import styled from 'styled-components';
+import styles from '../assets/styles/sendInvite.module.scss';
 import { db } from '../lib/init-firebase';
+
+import ClearIcon from '@mui/icons-material/Clear';
 
 import { fetchBoards } from '../redux/slices/boardsSlice';
 
@@ -22,7 +25,10 @@ const SendInvitePage = () => {
   const board_id = location.state;
 
   useEffect(() => {
-    dispatch(fetchBoards());
+    const getBoards = async () => {
+      dispatch(fetchBoards());
+    };
+    getBoards();
   }, [dispatch]);
 
   const { email } = formData;
@@ -50,8 +56,14 @@ const SendInvitePage = () => {
 
     return users?.map((user, index) => {
       return (
-        <div key={index}>
-          <p>{user}</p>
+        <div key={index} className={styles.user}>
+          <span>{user}</span>
+          <button
+            onClick={() => {
+              console.log('remove user');
+            }}>
+            <ClearIcon />
+          </button>
         </div>
       );
     });
@@ -80,6 +92,7 @@ const SendInvitePage = () => {
           console.log(error.text);
         },
       );
+    dispatch(fetchBoards());
   };
 
   return (
