@@ -10,35 +10,20 @@ import { db } from '../lib/init-firebase';
 import { fetchBoards } from '../redux/slices/boardsSlice';
 
 const SendInvitePage = () => {
-  const [boards, setBoards] = useState([]);
   const [formData, setFormData] = useState({
     email: '',
   });
 
   const dispatch = useDispatch();
+  const boards = useSelector((state) => state.boardsSlice.boards);
 
   const form = useRef();
   const location = useLocation();
   const board_id = location.state;
 
-  const getBoards = async () => {
-    dispatch(fetchBoards());
-  };
-
   useEffect(() => {
-    // const boards = query(collection(db, 'boards'));
-    // onSnapshot(boards, (snapShot) => {
-    //   setBoards(
-    //     snapShot.docs.map((doc) => {
-    //       return {
-    //         id: doc.id,
-    //         ...doc.data(),
-    //       };
-    //     }),
-    //   );
-    // });
-    getBoards();
-  }, [getBoards]);
+    dispatch(fetchBoards());
+  }, [dispatch]);
 
   const { email } = formData;
 
@@ -63,9 +48,9 @@ const SendInvitePage = () => {
     let users = board[0]?.users;
     console.log(users);
 
-    return users?.map((user) => {
+    return users?.map((user, index) => {
       return (
-        <div>
+        <div key={index}>
           <p>{user}</p>
         </div>
       );

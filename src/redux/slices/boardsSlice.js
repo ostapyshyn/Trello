@@ -35,20 +35,20 @@ const boardSlice = createSlice({
     [fetchBoards.pending]: (state) => {
       state.status = 'loading';
       state.error = null;
-      state.items = [];
+      state.boards = [];
     },
     [fetchBoards.fulfilled]: (state, action) => {
-      state.items = action.payload;
+      state.boards = action.payload;
       state.status = 'success';
     },
     [fetchBoards.rejected]: (state, action) => {
       state.error = action.payload;
       state.status = 'error';
-      state.items = [];
+      state.boards = [];
     },
   },
 });
 
-export const { setBoard } = boardSlice.actions;
+export const { setBoard, removeBoard } = boardSlice.actions;
 
 export default boardSlice.reducer;

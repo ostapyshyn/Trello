@@ -16,7 +16,7 @@ import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
   user: userReducer,
-  boards: boardsReducer,
+  boardsSlice: boardsReducer,
 });
 
 const persistConfig = {
