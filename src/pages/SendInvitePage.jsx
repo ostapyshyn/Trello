@@ -9,6 +9,7 @@ import styles from '../assets/styles/sendInvite.module.scss';
 import { db } from '../lib/init-firebase';
 
 import ClearIcon from '@mui/icons-material/Clear';
+import { FaTrashAlt } from 'react-icons/fa';
 
 import { fetchBoards } from '../redux/slices/boardsSlice';
 
@@ -48,6 +49,11 @@ const SendInvitePage = () => {
     }));
   };
 
+  const handleDelete = (id) => {
+    // const users = items.filter((item) => item.id !== id);
+    console.log(id);
+  };
+
   function showUsers() {
     let board = boards.filter((board) => board.id === board_id);
 
@@ -62,7 +68,7 @@ const SendInvitePage = () => {
             onClick={() => {
               console.log('remove user');
             }}>
-            <ClearIcon />
+            <FaTrashAlt onClick={() => handleDelete(user)} role="button" tabIndex="0" />
           </button>
         </div>
       );
