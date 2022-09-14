@@ -64,12 +64,7 @@ const SendInvitePage = () => {
       return (
         <div key={index} className={styles.user}>
           <span>{user}</span>
-          <button
-            onClick={() => {
-              console.log('remove user');
-            }}>
-            <FaTrashAlt onClick={() => handleDelete(user)} role="button" tabIndex="0" />
-          </button>
+          <FaTrashAlt onClick={() => handleDelete(user)} role="button" tabIndex="0" />
         </div>
       );
     });

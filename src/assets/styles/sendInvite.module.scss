@@ -2,24 +2,19 @@
   display: flex;
   align-items: center;
 
-  button {
-    background-color: transparent;
-    display: flex;
-    align-items: center;
+  svg {
+    width: 16px;
+    min-width: 16px;
+    margin-left: 10px;
+    height: 22px;
+    font-size: 1rem;
+    color: steelblue;
+    cursor: pointer;
+  }
 
-    svg {
-      width: 16px;
-      min-width: 16px;
-      height: 22px;
-      font-size: 1rem;
-      color: steelblue;
-      cursor: pointer;
-    }
-
-    svg:focus,
-    svg:hover {
-      color: red;
-      outline: none;
-    }
+  svg:focus,
+  svg:hover {
+    color: red;
+    outline: none;
   }
 }
