@@ -9,9 +9,11 @@ import styles from '../assets/styles/sendInvite.module.scss';
 import { db } from '../lib/init-firebase';
 
 import ClearIcon from '@mui/icons-material/Clear';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FiX } from 'react-icons/fi';
 
 import { fetchBoards } from '../redux/slices/boardsSlice';
+
+let users = '';
 
 const SendInvitePage = () => {
   const [formData, setFormData] = useState({
@@ -42,6 +44,15 @@ const SendInvitePage = () => {
     });
   };
 
+  const removeUsers = async (emails, boardId) => {
+    const boardRef = doc(db, 'boards', boardId);
+
+    await updateDoc(boardRef, {
+      //users: arrayUnion(email.),
+      users: emails,
+    });
+  };
+
   const onMutate = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -49,22 +60,23 @@ const SendInvitePage = () => {
     }));
   };
 
-  const handleDelete = (id) => {
-    // const users = items.filter((item) => item.id !== id);
-    console.log(id);
+  const handleDelete = (email) => {
+    const usersEmails = users.filter((item) => item !== email);
+    removeUsers(usersEmails, board_id);
+    dispatch(fetchBoards());
   };
 
   function showUsers() {
     let board = boards.filter((board) => board.id === board_id);
 
-    let users = board[0]?.users;
+    users = board[0]?.users;
     console.log(users);
 
     return users?.map((user, index) => {
       return (
         <div key={index} className={styles.user}>
           <span>{user}</span>
-          <FaTrashAlt onClick={() => handleDelete(user)} role="button" tabIndex="0" />
+          <FiX onClick={() => handleDelete(user)} role="button" />
         </div>
       );
     });
