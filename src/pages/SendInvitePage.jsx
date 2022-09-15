@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { arrayUnion, doc, updateDoc, onSnapshot, query, collection } from 'firebase/firestore';
 import styled from 'styled-components';
 import styles from '../assets/styles/sendInvite.module.scss';
@@ -19,7 +20,7 @@ const SendInvitePage = () => {
   const [formData, setFormData] = useState({
     email: '',
   });
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boardsSlice.boards);
 
@@ -82,6 +83,8 @@ const SendInvitePage = () => {
     });
   }
 
+  const goBack = () => navigate(-1);
+
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -116,6 +119,17 @@ const SendInvitePage = () => {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flexStart',
+          alignItems: 'center',
+          width: '100%',
+          marginLeft: '20px',
+        }}>
+        <BackButton onClick={goBack}>Go back</BackButton>
+      </div>
+
       <h2>Current board users:</h2>
       {showUsers()}
       <h2>Invite a user to the board:</h2>
@@ -186,5 +200,44 @@ const StyledContactForm = styled.div`
       color: white;
       border: none;
     }
+  }
+`;
+
+const BackButton = styled.button`
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  overflow: hidden;
+  border-radius: 5px;
+  border: none;
+  background-color: #3d348b;
+
+  &:hover {
+    border-radius: 5px;
+    padding-right: 24px;
+    padding-left: 8px;
+  }
+
+  &:hover:after {
+    opacity: 1;
+    right: 10px;
+  }
+
+  &:after {
+    content: '←';
+    position: absolute;
+    opacity: 0;
+    font-size: 20px;
+    line-height: 40px;
+    top: 0;
+    right: -20px;
+    transition: 0.4s;
   }
 `;
