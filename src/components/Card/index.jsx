@@ -8,6 +8,8 @@ import { Draggable } from 'react-beautiful-dnd';
 import { db } from '../../lib/init-firebase';
 import storeApi from '../../utils/storeApi';
 import { useParams } from 'react-router-dom';
+import { FiX } from 'react-icons/fi';
+
 import './styles.scss';
 
 import {
@@ -22,6 +24,7 @@ import {
   documentId,
 } from 'firebase/firestore';
 import { useRef } from 'react';
+import { style } from '@mui/system';
 
 export default function Card({ card, index, listId }) {
   const [open, setOpen] = useState(false);
@@ -149,10 +152,21 @@ export default function Card({ card, index, listId }) {
     addUserEmail(inputValue, index, listId, card.id, lists);
   };
 
+  const handleDelete = (email) => {
+    console.log(email);
+    // const usersEmails = users.filter((item) => item !== email);
+    // removeUsers(usersEmails, board_id);
+    // dispatch(fetchBoards());
+  };
+
   function showEmails() {
     let list = users.filter((user) => user.id === listId);
     let newlist = list[0].cards.filter((cards) => cards.id === card.id);
-    return newlist[0].users.map((user, index) => <div key={index}>{user}</div>);
+    return newlist[0].users.map((user, index) => (
+      <div key={index} className="removeUser">
+        {user} <FiX onClick={() => handleDelete(user)} role="button" />
+      </div>
+    ));
   }
 
   function checkDuplicates(email) {
