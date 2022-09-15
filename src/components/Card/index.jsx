@@ -129,6 +129,38 @@ export default function Card({ card, index, listId }) {
     });
   };
 
+  const removeUserEmail = (usr_email, index, listId, cardId, lists) => {
+    const listRef = doc(db, 'lists', listId);
+
+    // console.log('usr_email+:', usr_email);
+    // console.log('listId+:', listId);
+    // console.log('index:', index);
+    // console.log('cardId+:', cardId);
+    // console.log('lists+:', lists);
+    // console.log('board:', lists.users);
+    // console.log('users:', users);
+
+    console.log('inside remove');
+    lists.forEach(async (list) => {
+      if (list.id === listId) {
+        await updateDoc(listRef, {
+          cards: list.cards.map((card) => {
+            if (card.id === cardId) {
+              for (let i = 0; i < card.users.length; i++) {
+                if (card.users[i] === usr_email) {
+                  card.users.splice(i, 1);
+                }
+              }
+              return card;
+            }
+            return card;
+          }),
+        });
+      }
+      return list;
+    });
+  };
+
   function checkEmail(email) {
     let board = boards.filter((board) => board.id === params.board);
     return board[0].users.includes(email);
@@ -150,12 +182,13 @@ export default function Card({ card, index, listId }) {
     }
 
     addUserEmail(inputValue, index, listId, card.id, lists);
+    setInputValue('');
   };
 
   const handleDelete = (email) => {
     console.log(email);
     // const usersEmails = users.filter((item) => item !== email);
-    // removeUsers(usersEmails, board_id);
+    removeUserEmail(email, index, listId, card.id, lists);
     // dispatch(fetchBoards());
   };
 
