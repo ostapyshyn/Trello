@@ -28,6 +28,7 @@ import { style } from '@mui/system';
 
 export default function Card({ card, index, listId }) {
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
   const [newTitle, setNewTitle] = useState(card.title);
   const [visiblePopup, setVisiblePopup] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -254,8 +255,10 @@ export default function Card({ card, index, listId }) {
                   alt="Close button"
                   className="add-email__popup-close-btn"
                 />
-                {<p>Task users:</p>}
-                {showEmails()}
+                <button type="button" onClick={() => setShow(!show)} className="showUsers">
+                  {show ? 'Hide' : 'Show'} task users
+                </button>
+                {show && showEmails()}
               </div>
 
               <div className="addUser">

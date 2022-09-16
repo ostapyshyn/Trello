@@ -4,12 +4,11 @@ import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { arrayUnion, doc, updateDoc, onSnapshot, query, collection } from 'firebase/firestore';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import styled from 'styled-components';
 import styles from '../assets/styles/sendInvite.module.scss';
 import { db } from '../lib/init-firebase';
 
-import ClearIcon from '@mui/icons-material/Clear';
 import { FiX } from 'react-icons/fi';
 
 import { fetchBoards } from '../redux/slices/boardsSlice';
