@@ -17,6 +17,7 @@ import { fetchBoards } from '../redux/slices/boardsSlice';
 let users = '';
 
 const SendInvitePage = () => {
+  const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
   });
@@ -129,9 +130,11 @@ const SendInvitePage = () => {
         }}>
         <BackButton onClick={goBack}>Go back</BackButton>
       </div>
+      <button type="button" onClick={() => setShow(!show)} className={styles.showUsers}>
+        {show ? 'Hide' : 'Show'} currrent boards users
+      </button>
+      {show && showUsers()}
 
-      <h2>Current board users:</h2>
-      {showUsers()}
       <h2>Invite a user to the board:</h2>
       <StyledContactForm>
         <form ref={form} onSubmit={sendEmail}>
