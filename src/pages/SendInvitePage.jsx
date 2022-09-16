@@ -202,6 +202,7 @@ const StyledContactForm = styled.div`
       background: rgb(249, 105, 14);
       color: white;
       border: none;
+      box-shadow: 2px 2px 5px #000;
     }
   }
 `;
