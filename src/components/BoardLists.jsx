@@ -6,8 +6,11 @@ import { getAuth } from 'firebase/auth';
 import { db } from '../lib/init-firebase';
 import Spinner from '../components/Spinner';
 import shareIcon from '../assets/svg/shareIcon.svg';
+import { IoArrowBackOutline } from 'react-icons/io5';
+
 import styled from 'styled-components';
 import Home from './Home/Home';
+import styles from '../assets/styles/boardsLists.module.scss';
 
 const BoardLists = () => {
   const [listing, setListing] = useState(null);
@@ -56,14 +59,15 @@ const BoardLists = () => {
         }}>
         <img src={shareIcon} alt="shareIcon" />
       </ShareIconDiv>
-
       {shareLinkCopied && <LinkCopied>Link Copied!</LinkCopied>}
-
-      <BackButton onClick={goBack}>Go back</BackButton>
-      <DeleteButton onClick={() => deleteBoard(params.board)}>Delete board</DeleteButton>
-      <Link style={{ display: 'revert' }} to="/send-invite" state={params.board}>
-        <InviteUserButton>Invite a user</InviteUserButton>
-      </Link>
+      {/* <BackButton onClick={goBack}>Go back</BackButton> */}
+      <div className={styles.menu}>
+        <IoArrowBackOutline onClick={goBack} />
+        <DeleteButton onClick={() => deleteBoard(params.board)}>Delete board</DeleteButton>
+        <Link style={{ display: 'revert' }} to="/send-invite" state={params.board}>
+          <InviteUserButton>Invite a user</InviteUserButton>
+        </Link>
+      </div>
 
       <ListingDetails className="listingName">{listing.name} board lists:</ListingDetails>
       <Home />

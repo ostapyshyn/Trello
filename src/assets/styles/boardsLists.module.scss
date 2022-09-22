@@ -1,0 +1,22 @@
+.backButton {
+  width: 180px;
+}
+
+.menu {
+  display: flex;
+}
+
+svg {
+  width: 48px;
+  min-width: 48px;
+  height: 36px;
+  font-size: 1rem;
+  color: steelblue;
+  cursor: pointer;
+}
+
+svg:focus,
+svg:hover {
+  color: red;
+  outline: none;
+}
