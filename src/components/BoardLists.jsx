@@ -7,7 +7,7 @@ import { db } from '../lib/init-firebase';
 import Spinner from '../components/Spinner';
 import shareIcon from '../assets/svg/shareIcon.svg';
 import { IoArrowBackOutline } from 'react-icons/io5';
-
+import { FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import styled from 'styled-components';
 import Home from './Home/Home';
 import styles from '../assets/styles/boardsLists.module.scss';
@@ -15,6 +15,7 @@ import styles from '../assets/styles/boardsLists.module.scss';
 const BoardLists = () => {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showLogout, setShowLogout] = useState(false);
   const [shareLinkCopied, setShareLinkCopied] = useState(false);
 
   const navigate = useNavigate();
@@ -62,11 +63,24 @@ const BoardLists = () => {
       {shareLinkCopied && <LinkCopied>Link Copied!</LinkCopied>}
       {/* <BackButton onClick={goBack}>Go back</BackButton> */}
       <div className={styles.menu}>
-        <IoArrowBackOutline onClick={goBack} />
+        <IoArrowBackOutline onClick={goBack} className={styles.backButton} />
         <DeleteButton onClick={() => deleteBoard(params.board)}>Delete board</DeleteButton>
         <Link style={{ display: 'revert' }} to="/send-invite" state={params.board}>
           <InviteUserButton>Invite a user</InviteUserButton>
         </Link>
+
+        <div className="btn-container">
+          <button type="button" className="btn" onClick={() => setShowLogout(!showLogout)}>
+            <FaUserCircle />
+            Settings
+            <FaCaretDown />
+          </button>
+          <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
+            <button type="button" className="dropdown-btn" onClick={() => console.log('test')}>
+              test
+            </button>
+          </div>
+        </div>
       </div>
 
       <ListingDetails className="listingName">{listing.name} board lists:</ListingDetails>
