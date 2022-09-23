@@ -8,7 +8,7 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import styled from 'styled-components';
 import styles from '../assets/styles/sendInvite.module.scss';
 import { db } from '../lib/init-firebase';
-
+import { IoArrowBackOutline } from 'react-icons/io5';
 import { FiX } from 'react-icons/fi';
 
 import { fetchBoards } from '../redux/slices/boardsSlice';
@@ -120,6 +120,7 @@ const SendInvitePage = () => {
         alignItems: 'center',
       }}>
       <div
+        className=""
         style={{
           display: 'flex',
           justifyContent: 'flexStart',
@@ -127,8 +128,10 @@ const SendInvitePage = () => {
           width: '100%',
           marginLeft: '20px',
         }}>
-        <BackButton onClick={goBack}>Go back</BackButton>
+        {/* <BackButton onClick={goBack}>Go back</BackButton> */}
+        <IoArrowBackOutline onClick={goBack} className={styles.backButton} />
       </div>
+
       <button type="button" onClick={() => setShow(!show)} className={styles.showUsers}>
         {show ? 'Hide' : 'Show'} currrent boards users
       </button>

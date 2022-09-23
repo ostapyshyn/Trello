@@ -9,6 +9,7 @@ import Spinner from '../components/Spinner';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
+
 function CreateBoard() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
