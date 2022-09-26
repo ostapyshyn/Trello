@@ -64,10 +64,6 @@ const BoardLists = () => {
       {/* <BackButton onClick={goBack}>Go back</BackButton> */}
       <div className={styles.menu}>
         <IoArrowBackOutline onClick={goBack} className={styles.backButton} />
-        <DeleteButton onClick={() => deleteBoard(params.board)}>Delete board</DeleteButton>
-        <Link style={{ display: 'revert' }} to="/send-invite" state={params.board}>
-          <InviteUserButton>Invite a user</InviteUserButton>
-        </Link>
 
         <div className="btn-container">
           <button type="button" className="btn" onClick={() => setShowLogout(!showLogout)}>
@@ -76,9 +72,10 @@ const BoardLists = () => {
             <FaCaretDown />
           </button>
           <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
-            <button type="button" className="dropdown-btn" onClick={() => console.log('test')}>
-              test
-            </button>
+            <DeleteButton onClick={() => deleteBoard(params.board)}>Delete board</DeleteButton>
+            <Link style={{ display: 'revert' }} to="/send-invite" state={params.board}>
+              <InviteUserButton>Invite a user</InviteUserButton>
+            </Link>
           </div>
         </div>
       </div>
