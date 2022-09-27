@@ -8,7 +8,8 @@ import { toast } from 'react-toastify';
 import Spinner from '../components/Spinner';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-
+import { IoArrowBackOutline } from 'react-icons/io5';
+import styles from '../assets/styles/createBoard.module.scss';
 
 function CreateBoard() {
   const [loading, setLoading] = useState(false);
@@ -72,7 +73,11 @@ function CreateBoard() {
 
   return (
     <div className="profile">
-      <BackButton onClick={goBack}>Go back</BackButton>
+      {/* <BackButton onClick={goBack}>Go back</BackButton> */}
+      <div className={styles.svg}>
+        <IoArrowBackOutline onClick={goBack} />
+      </div>
+
       <header>
         <p className="pageHeader">Create a Board</p>
       </header>
