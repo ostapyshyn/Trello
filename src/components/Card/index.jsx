@@ -9,6 +9,7 @@ import { db } from '../../lib/init-firebase';
 import storeApi from '../../utils/storeApi';
 import { useParams } from 'react-router-dom';
 import { FiX } from 'react-icons/fi';
+import useOutsideClick from '../../hooks/useOnClickOutside';
 
 import './styles.scss';
 
@@ -37,6 +38,8 @@ export default function Card({ card, index, listId }) {
   const [users, setUsers] = useState([]);
   const [boards, setBoards] = useState([]);
   const params = useParams();
+
+  const ref = useOutsideClick(() => setVisiblePopup(false));
 
   const handleOnBlur = (cardId) => {
     updateCardTitle(newTitle, index, listId);
@@ -240,14 +243,14 @@ export default function Card({ card, index, listId }) {
                     <DeleteOutline />
                   </button>
                 </div>
-                <button onClick={() => setVisiblePopup(true)}>
+                <button onClick={() => setVisiblePopup(!visiblePopup)} ref={ref}>
                   <PersonAddIcon />
                 </button>
               </div>
             )}
           </div>
           {visiblePopup && (
-            <div ref={emailRef} className="add-email__popup">
+            <div className="add-email__popup">
               <div>
                 <img
                   onClick={onClose}
