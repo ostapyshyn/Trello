@@ -104,6 +104,10 @@ const ShareIconDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 375px) {
+    top: 20px;
+  }
 `;
 
 const ListingDetails = styled.p`
