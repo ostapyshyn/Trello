@@ -8,13 +8,17 @@ import './index.scss';
 import App from './App';
 import store, { persistor } from './redux';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </BrowserRouter>
-  </Provider>,
-);
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </BrowserRouter>
+    </Provider>,
+  );
+}
