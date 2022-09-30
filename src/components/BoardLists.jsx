@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getDoc, doc, deleteDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../lib/init-firebase';
-import Spinner from '../components/Spinner';
+import Spinner from './Spinner';
 import shareIcon from '../assets/svg/shareIcon.svg';
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { FaUserCircle, FaCaretDown } from 'react-icons/fa';
