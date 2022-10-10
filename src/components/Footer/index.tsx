@@ -9,7 +9,7 @@ function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const pathMatchRoute = (route) => {
+  const pathMatchRoute = (route: string) => {
     if (route === location.pathname) {
       return true;
     }
@@ -38,8 +38,7 @@ function Footer() {
             <p
               className={
                 pathMatchRoute('/about') ? 'navbarListItemNameActive' : 'navbarListItemName'
-              }
-            >
+              }>
               About
             </p>
           </li>
@@ -52,8 +51,7 @@ function Footer() {
             <p
               className={
                 pathMatchRoute('/profile') ? 'navbarListItemNameActive' : 'navbarListItemName'
-              }
-            >
+              }>
               Profile
             </p>
           </li>
