@@ -10,7 +10,7 @@ const AboutPage = () => {
       <h1>About us</h1>
       <h2>Hello {name}❗️</h2>
       <p>This is a demo Trello project!</p>
-      <p>Technologies: React, Redux, Firebase</p>
+      <p>Technologies: React, Redux, Firebase, TypeScript</p>
       <p>&copy; {new Date().getFullYear()}</p>
     </ProfileCard>
   );

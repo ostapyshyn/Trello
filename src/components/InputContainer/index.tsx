@@ -5,7 +5,12 @@ import InputCard from '../InputCard';
 
 import './styles.scss';
 
-export default function InputContainer({ listId, type }) {
+type InputContainerProps = {
+  listId: string;
+  type: string;
+};
+
+const InputContainer: React.FC<InputContainerProps> = ({ listId, type }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,4 +32,6 @@ export default function InputContainer({ listId, type }) {
       </Collapse>
     </div>
   );
-}
+};
+
+export default InputContainer;
