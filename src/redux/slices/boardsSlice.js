@@ -1,8 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { collection, getDocs } from 'firebase/firestore';
 
 import { STATUSES } from '../data';
 import { db } from '../../lib/init-firebase';
+
+import { Boards } from '../../types';
 
 const initialState = {
   status: null,
