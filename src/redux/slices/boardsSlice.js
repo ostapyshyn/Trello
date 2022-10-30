@@ -6,6 +6,14 @@ import { db } from '../../lib/init-firebase';
 
 import { Boards } from '../../types';
 
+// type BoardsItem = {
+//   name: string;
+// };
+
+// interface BoardSliceState {
+//   boards: BoardsItem[];
+// }
+
 const initialState = {
   status: null,
   error: null,
