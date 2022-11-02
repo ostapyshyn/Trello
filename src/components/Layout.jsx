@@ -5,7 +5,7 @@ import Footer from './Footer';
 const Layout = () => {
   return (
     <>
-      <Navbar />
+      <Navbar title="Trello Board Clone ✨" />
       <Outlet />
       <Footer />
     </>

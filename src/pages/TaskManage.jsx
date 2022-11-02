@@ -36,7 +36,7 @@ export const TaskManage = () => {
             id: doc.id,
             ...doc.data(),
           };
-        })
+        }),
       );
     });
   }, []);
